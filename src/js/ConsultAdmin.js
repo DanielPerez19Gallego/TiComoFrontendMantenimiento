@@ -32,7 +32,7 @@ class ConsultAdmin extends Component {
 			if ([400].indexOf(response.status) !== -1) {
 				this.props.history.push({
 					pathname: '/admin',
-					value: 2,
+					value: 1,
 				});
 			}
 			return response.json();
@@ -57,7 +57,7 @@ class ConsultAdmin extends Component {
 				if (response.status == 200) {
 					this.props.history.push({
 						pathname: '/admin',
-						value: 2,
+						value: 1,
 					});
 				}
 				return response.text();
@@ -92,7 +92,7 @@ class ConsultAdmin extends Component {
 					alert("Cambios guardados correctamente");
 					this.props.history.push({
 						pathname: '/admin',
-						value: 2,
+						value: 1,
 					});
 				}
 				return response.text();
@@ -116,7 +116,7 @@ class ConsultAdmin extends Component {
 	back = () => {
 		this.props.history.push({
 			pathname: '/admin',
-			value: 2,
+			value: 1,
 		});
 	}
 
@@ -135,47 +135,42 @@ class ConsultAdmin extends Component {
 
 	render() {
 		return (
-			<div class="center">
-				<img src={IMAGES.LOGO} className="logo" width="150" height="80" alt="" />
-				<div class="center">
-					<div class="center">
-						<div>
-							<div class="card">
-								<h5 class="text-center mb-4">INFORMACIÓN ADMINISTRADOR</h5>
-								<Tooltip title="No puede contener: [1-9]/*@..." placement="left-start">
-								<label class="form-control-label px-0">Nombre<span class="text-danger"> *</span></label>
-								</Tooltip>
-								<input class="Fields" type="text" name="name" placeholder={this.state.admin.name} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
-								<label class="text-danger-custom" id="name"></label>
-								<Tooltip title="No puede contener: [1-9]/*@..." placement="left-start">
-								<label class="form-control-label px-0">Apellido<span class="text-danger"> *</span></label>
-								</Tooltip>
-								<input class="Fields" type="text" name="surname" placeholder={this.state.admin.surname} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
-								<label class="text-danger-custom" id="surname"></label>
-								<Tooltip title="No puede haber dos usuarios con el mismo email " placement="left-start">
-								<label class="form-control-label px-0">Email<span class="text-danger"> *</span></label>
-								</Tooltip>
-								<input class="Fields" type="text" name="email" placeholder={this.state.admin.email} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
-								<label class="text-danger-custom" id="email"></label>
-								<label class="form-control-label px-0">Zona<span class="text-danger"> *</span></label>
-								<input class="Fields" type="text" name="zone" placeholder={this.state.admin.zone} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
-								<div class="columns">
-									<input type="submit" value="MODIFICAR" onClick={this.handleModifyClik.bind(this)} />
-									<input type="submit" value="ELIMINAR" onClick={() => this.deleteAdmin()} />
-								</div>
-								<div hidden={this.state.disabled ? true : false}>
-									<label>¿Desea guardar los cambios?</label>
-									<div class="columns">
-										<input type="submit" value="ACEPTAR" onClick={() => this.modifyAdmin()} />
-										<input type="submit" value="CANCELAR" onClick={() => this.back()} />
-									</div>
-								</div>
-								<div class="columnsForIcons">
-								<Tooltip title="Cancelar" placement="top-start">
-                                    <FontAwesomeIcon icon={faLeftLong} font-size={20} color={"#000000"} onClick={() => this.back()} />
-                                </Tooltip>
-								</div>
-							</div>
+			<div className="center-log">
+				<div className="card-log">
+					<img src={IMAGES.LOGO} className="centerImage img_logo" alt="" />
+					
+					<div class="columnsForIcons">
+						<Tooltip title="Cancelar" placement="top-start">
+							<FontAwesomeIcon icon={faLeftLong} font-size={20} color={"#000000"} onClick={() => this.back()} />
+						</Tooltip>
+					</div>
+					<h5 class="text-center mb-4">INFORMACIÓN ADMINISTRADOR</h5>
+					<Tooltip title="No puede contener: [1-9]/*@..." placement="left-start">
+						<label class="form-control-label px-0">Nombre<span class="text-danger"> *</span></label>
+					</Tooltip>
+					<input class="Fields" type="text" name="name" placeholder={this.state.admin.name} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
+					<label class="text-danger-custom" id="name"></label>
+					<Tooltip title="No puede contener: [1-9]/*@..." placement="left-start">
+						<label class="form-control-label px-0">Apellido<span class="text-danger"> *</span></label>
+					</Tooltip>
+					<input class="Fields" type="text" name="surname" placeholder={this.state.admin.surname} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
+					<label class="text-danger-custom" id="surname"></label>
+					<Tooltip title="No puede haber dos usuarios con el mismo email " placement="left-start">
+						<label class="form-control-label px-0">Email<span class="text-danger"> *</span></label>
+					</Tooltip>
+					<input class="Fields" type="text" name="email" placeholder={this.state.admin.email} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
+					<label class="text-danger-custom" id="email"></label>
+					<label class="form-control-label px-0">Zona<span class="text-danger"> *</span></label>
+					<input class="Fields" type="text" name="zone" placeholder={this.state.admin.zone} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
+					<div class="columns-rid">
+						<input type="submit" value="MODIFICAR" onClick={this.handleModifyClik.bind(this)} />
+						<input type="submit" value="ELIMINAR" onClick={() => this.deleteAdmin()} />
+					</div>
+					<div hidden={this.state.disabled ? true : false}>
+						<label>¿Desea guardar los cambios?</label>
+						<div class="columns-rid">
+							<input type="submit" value="ACEPTAR" onClick={() => this.modifyAdmin()} />
+							<input type="submit" value="CANCELAR" onClick={() => this.back()} />
 						</div>
 					</div>
 				</div>

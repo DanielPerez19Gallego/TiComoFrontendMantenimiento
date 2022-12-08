@@ -14,6 +14,8 @@ export const PrivateRoute = ({ component: Component, roles, ...rest }) => (
             if (roles && roles.indexOf(user.role) === -1) {
                 return <Redirect to={{ pathname: '/'}} />
             }
+            console.log(roles);
+            console.log(user.role);
             return <Component {...props} />
         }catch(err) {
             console.log(err);

@@ -29,7 +29,7 @@ class AddAdmin extends Component {
 
 	/* METHODS */
 	addAdmin = async () => {
-		if(this.state.form.validPassword){
+		if (this.state.form.validPassword) {
 			fetch(ROUTES.PROXY + '/user/register', {
 				method: 'POST',
 				headers: {
@@ -49,7 +49,7 @@ class AddAdmin extends Component {
 					alert("Administrador registrado correctamente");
 					this.props.history.push({
 						pathname: '/admin',
-						value: 2,
+						value: 1,
 					});
 				}
 				return response.text();
@@ -62,14 +62,14 @@ class AddAdmin extends Component {
 				}).catch((err) => {
 					console.log(err);
 				})
-			}
+		}
 	}
 
 	/* EVENTS HANDLER */
 	back = () => {
 		this.props.history.push({
 			pathname: '/admin',
-			value: 2,
+			value: 1,
 		});
 	}
 
@@ -87,67 +87,61 @@ class AddAdmin extends Component {
 	}
 
 	validPassword = () => {
-		if(this.state.form.validPassword){
+		if (this.state.form.validPassword) {
 			this.state.form.validPassword = false
-		}else{
+		} else {
 			this.state.form.validPassword = true
 		}
 	}
 
 	render() {
 		return (
-			<div class="center">
-				<img src={IMAGES.LOGO} className="logo" width="150" height="80" alt="" />
-				<div class="center">
-					<div class="center">
-						<div>
-							<div class="card">
-								<h5 class="text-center mb-4">AÑADIR ADMIN</h5>
-								
-								<Tooltip title="No puede contener: [1-9]/*@..." placement="left-start">
-								<label class="form-control-label px-0">Nombre<span class="text-danger"> *</span></label>
-								</Tooltip>
-								<input type="text" name="name" placeholder="Nombre" required="" onChange={this.handleChange} />
-								<label class="text-danger-custom" id="name"></label>
+			<div className="center-log">
+				<div className="card-log">
+					<img src={IMAGES.LOGO} className="centerImage img_logo" alt="" />
+					<h5 class="text-center mb-4">AÑADIR ADMIN</h5>
 
-								<Tooltip title="No puede contener: [1-9]/*@..." placement="left-start">
-								<label class="form-control-label px-0">Apellido<span class="text-danger"> *</span></label>
-								</Tooltip>
-								<input type="text" name="surname" placeholder="Apellido" required="" onChange={this.handleChange} />
-								<label class="text-danger-custom" id="surname"></label>
+					<Tooltip title="No puede contener: [1-9]/*@..." placement="left-start">
+						<label class="form-control-label px-0">Nombre<span class="text-danger"> *</span></label>
+					</Tooltip>
+					<input type="text" name="name" placeholder="Nombre" required="" onChange={this.handleChange} />
+					<label class="text-danger-custom" id="name"></label>
 
-								<label class="form-control-label px-0">Zona<span class="text-danger"> *</span></label>
-								<input type="text" name="zone" placeholder="Torreón" required="" onChange={this.handleChange} />
+					<Tooltip title="No puede contener: [1-9]/*@..." placement="left-start">
+						<label class="form-control-label px-0">Apellido<span class="text-danger"> *</span></label>
+					</Tooltip>
+					<input type="text" name="surname" placeholder="Apellido" required="" onChange={this.handleChange} />
+					<label class="text-danger-custom" id="surname"></label>
 
-								<label class="form-control-label px-0">Email<span class="text-danger"> *</span></label>
-								<input type="text" name="email" placeholder="Example@mail.com" required="" onChange={this.handleChange} />
-								<label class="text-danger-custom" id="email"></label>
+					<label class="form-control-label px-0">Zona<span class="text-danger"> *</span></label>
+					<input type="text" name="zone" placeholder="Torreón" required="" onChange={this.handleChange} />
 
-								<label class="form-control-label px-0">Contraseña<span class="text-danger"> *</span></label>
-								<input type="password" name="password" placeholder="******" required="" onChange={this.handleChange} />
+					<label class="form-control-label px-0">Email<span class="text-danger"> *</span></label>
+					<input type="text" name="email" placeholder="Example@mail.com" required="" onChange={this.handleChange} />
+					<label class="text-danger-custom" id="email"></label>
 
-								<PasswordChecklist
-									rules={["minLength","lowercase","capital","number","specialChar"]}
-									minLength={8}
-									value={this.state.form.password}
-									onChange={this.validPassword}
-									messages={{
-										minLength: "La contraseña tiene más de 8 caracteres.",
-										lowercase: "La contraseña tiene una letra minúscula.",
-										capital: "La contraseña tiene una letra mayúscula.",
-										number: "La contraseña tiene un número.",
-										specialChar: "La contraseña tiene caracteres especiales.",
-									}}
-									
-								/>
+					<label class="form-control-label px-0">Contraseña<span class="text-danger"> *</span></label>
+					<input type="password" name="password" placeholder="******" required="" onChange={this.handleChange} />
 
-								<div class="columns">
-									<input type="submit" value="ACEPTAR" onClick={() => this.addAdmin()} />
-									<input type="submit" value="CANCELAR" onClick={() => this.back()} />
-								
-								</div>
-							</div>
-						</div>
+					<PasswordChecklist
+						rules={["minLength", "lowercase", "capital", "number", "specialChar"]}
+						minLength={8}
+						value={this.state.form.password}
+						onChange={this.validPassword}
+						messages={{
+							minLength: "La contraseña tiene más de 8 caracteres.",
+							lowercase: "La contraseña tiene una letra minúscula.",
+							capital: "La contraseña tiene una letra mayúscula.",
+							number: "La contraseña tiene un número.",
+							specialChar: "La contraseña tiene caracteres especiales.",
+						}}
+
+					/>
+
+					<div class="columns-rid">
+						<input type="submit" value="ACEPTAR" onClick={() => this.addAdmin()} />
+						<input type="submit" value="CANCELAR" onClick={() => this.back()} />
+
 					</div>
 				</div>
 			</div>

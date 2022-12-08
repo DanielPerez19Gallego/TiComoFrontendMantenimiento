@@ -25,11 +25,11 @@ class ClientConsultOrder extends Component {
     /* INTIALIZER */
     async componentDidMount() {
 
-        if(this.state.order.state == "DELIVERED"){
+        if (this.state.order.state == "DELIVERED") {
             this.state.disabledValorate = true;
         }
 
-        if(this.state.order.state == "NEW"){
+        if (this.state.order.state == "NEW") {
             this.state.disabledDelete = true;
         }
 
@@ -134,8 +134,8 @@ class ClientConsultOrder extends Component {
         this.state.bill["translate"] = dict;
     }
 
-    deleteOrder=async()=>{
-       if(this.state.order.state == "NEW"){
+    deleteOrder = async () => {
+        if (this.state.order.state == "NEW") {
 
             var mensaje = confirm("¿Desea anular este pedido?");
             if (mensaje) {
@@ -147,12 +147,12 @@ class ClientConsultOrder extends Component {
                             'Content-Type': 'application/json'
                         },
                     }).then((response) => {
-                    if(response.status==200){
-                        this.props.history.push({
-                            pathname: '/client',
-                            client: this.state.client,
-                            value: 3
-                        });
+                        if (response.status == 200) {
+                            this.props.history.push({
+                                pathname: '/client',
+                                client: this.state.client,
+                                value: 2
+                            });
                         }
                         return response.text();
                     })
@@ -179,9 +179,9 @@ class ClientConsultOrder extends Component {
             (element) => {
                 return (
                     <tr>
-                        <td>{(this.findArrayElementById(this.state.plates, Number(element.plateID))).name}</td>
-                        <td>{element.quantity}</td>
-                        <td>{element.quantity * (this.findArrayElementById(this.state.plates, Number(element.plateID))).cost}</td>
+                        <td data-label="Nombre">{(this.findArrayElementById(this.state.plates, Number(element.plateID))).name}</td>
+                        <td data-label="Cantidad">{element.quantity}</td>
+                        <td data-label="Coste">{element.quantity * (this.findArrayElementById(this.state.plates, Number(element.plateID))).cost}</td>
                     </tr>
                 )
             }
@@ -211,7 +211,7 @@ class ClientConsultOrder extends Component {
     back = () => {
         this.props.history.push({
             pathname: '/client',
-            value: 3
+            value: 2
         })
     }
 
@@ -242,33 +242,30 @@ class ClientConsultOrder extends Component {
 
     render() {
         return (
-            <div class="center">
-                <img src={IMAGES.LOGO} className="logo" width="150" height="80" alt="" />
-                <div class="center">
-                    <div class="center">
-                        <div class="card">
-                            <div>
-                                <h5 class="text-center mb-4">PEDIDO</h5>
-                                <div className="subheading mb-5">
-                                    {this.CartTable(this.state.cart)}
-                                </div>
-                                <h5 class="text-center mb-4">PRECIO TOTAL: {this.state.order.price} €</h5>
-                            </div>
-                            <div class="columns"><input type="submit" value="Factura" onClick={() => this.generate(this.state.bill)} /></div>
-                            <div class="columns">
-                                <div hidden={this.state.disabledValorate ? false : true}>
-                                    <input type="submit" value="Valorar" onClick={() => this.goToRate(this.state.order)} />
-                                </div>
-                                <div hidden={this.state.disabledDelete ? false : true}>
-                                    <input type="submit" value="Anular" onClick={() => this.deleteOrder(this.state.order)} />
-                                </div>
-                            </div>
-
-                            <div class="columnsForIcons">
-                                <Tooltip title="Cancelar" placement="top-start">
-                                    <FontAwesomeIcon icon={faLeftLong} font-size={20} color={"#000000"} onClick={() => this.back()} />
-                                </Tooltip>
-                            </div>
+            <div class="center-log">
+                <div class="card-log">
+                    <img src={IMAGES.LOGO} className="logo img_logo" alt="" />
+                    <div>
+                        <div class="columnsForIcons-cli">
+                            <Tooltip title="Cancelar" placement="top-start">
+                                <FontAwesomeIcon icon={faLeftLong} font-size={20} color={"#000000"} onClick={() => this.back()} />
+                            </Tooltip>
+                        </div>
+                        <h5 class="text-center mb-4">PEDIDO</h5>
+                        <div className="subheading mb-5">
+                            {this.CartTable(this.state.cart)}
+                        </div>
+                        <h5 class="text-center mb-4">PRECIO TOTAL: {this.state.order.price} €</h5>
+                    </div>
+                    <div class="columns-rid">
+                        <input type="submit" value="Factura" onClick={() => this.generate(this.state.bill)} />
+                    </div>
+                    <div class="columns-rid">
+                        <div hidden={this.state.disabledValorate ? false : true}>
+                            <input type="submit" value="Valorar" onClick={() => this.goToRate(this.state.order)} />
+                        </div>
+                        <div hidden={this.state.disabledDelete ? false : true}>
+                            <input type="submit" value="Anular" onClick={() => this.deleteOrder(this.state.order)} />
                         </div>
                     </div>
                 </div>

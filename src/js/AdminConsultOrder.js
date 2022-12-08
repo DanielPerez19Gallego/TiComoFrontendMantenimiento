@@ -34,7 +34,7 @@ class AdminConsultOrder extends Component {
             },
         }).then((response) => {
             if ([400].indexOf(response.status) !== -1) {
-                this.props.history.push('/admin/consultRestaurant/'+this.state.order.restaurantID);
+                this.props.history.push('/admin/consultRestaurant/' + this.state.order.restaurantID);
             }
             return response.json();
         }).then(data => {
@@ -51,7 +51,7 @@ class AdminConsultOrder extends Component {
             },
         }).then((response) => {
             if ([400].indexOf(response.status) !== -1) {
-                this.props.history.push('/admin/consultRestaurant/'+this.state.order.restaurantID);
+                this.props.history.push('/admin/consultRestaurant/' + this.state.order.restaurantID);
             }
             return response.json();
         }).then(data => {
@@ -68,7 +68,7 @@ class AdminConsultOrder extends Component {
             },
         }).then((response) => {
             if ([400].indexOf(response.status) !== -1) {
-                this.props.history.push('/admin/consultRestaurant/'+this.state.order.restaurantID);
+                this.props.history.push('/admin/consultRestaurant/' + this.state.order.restaurantID);
             }
             return response.json();
         }).then(data => {
@@ -80,7 +80,7 @@ class AdminConsultOrder extends Component {
         await this.prepareBild()
     }
 
-    prepareBild =async() => {
+    prepareBild = async () => {
         let dict = {};
         dict["logo"] = "https://firebasestorage.googleapis.com/v0/b/ticomo01.appspot.com/o/images%2FLogo.png?alt=media&token=7974bbfb-833b-41a7-90a7-264ab0507559";
         this.state.bill["images"] = dict;
@@ -103,8 +103,8 @@ class AdminConsultOrder extends Component {
         this.state.bill["client"] = dict;
         dict = {};
         dict["number"] = this.state.order.id;
-        dict["date"] = this.state.order.releaseDate.substring(0,10);
-        dict["due-date"] = this.state.order.releaseDate.substring(0,10);
+        dict["date"] = this.state.order.releaseDate.substring(0, 10);
+        dict["due-date"] = this.state.order.releaseDate.substring(0, 10);
         this.state.bill["information"] = dict;
         let plates = [];
         for (let i = 0; i < this.state.cart.length; i++) {
@@ -114,7 +114,7 @@ class AdminConsultOrder extends Component {
             dict["price"] = this.findArrayElementById(this.state.plates, this.state.cart[i].plateID).cost;
             dict["tax-rate"] = 0;
             plates.push(dict);
-        }  
+        }
         this.state.bill["products"] = plates;
         dict = {}
         dict["products"] = "Platos";
@@ -127,7 +127,7 @@ class AdminConsultOrder extends Component {
         this.state.bill["translate"] = dict;
     }
 
-    goToRate(order){
+    goToRate(order) {
         this.props.history.push({
             pathname: '/order/rate',
             order: order,
@@ -147,13 +147,13 @@ class AdminConsultOrder extends Component {
             (element) => {
                 return (
                     <tr>
-                        <td>{(this.findArrayElementById(this.state.plates, Number(element.plateID))).name}</td>
-                        <td>{element.quantity}</td>
-                        <td>{element.quantity * (this.findArrayElementById(this.state.plates, Number(element.plateID))).cost}€</td>
+                        <td data-label="Nombre">{(this.findArrayElementById(this.state.plates, Number(element.plateID))).name}</td>
+                        <td data-label="Cantidad">{element.quantity}</td>
+                        <td data-label="Coste">{element.quantity * (this.findArrayElementById(this.state.plates, Number(element.plateID))).cost}€</td>
                     </tr>
                 )
             }
-            )
+        )
 
         return (
             <Table striped bordered hover variant="dark">
@@ -177,7 +177,7 @@ class AdminConsultOrder extends Component {
     }
 
     back = () => {
-        this.props.history.push('/admin/consultRestaurant/'+this.state.order.restaurantID);
+        this.props.history.push('/admin/consultRestaurant/' + this.state.order.restaurantID);
     }
 
     handleModifyClik() {
@@ -193,32 +193,30 @@ class AdminConsultOrder extends Component {
         });
     }
 
-    generate=async(data)=>{
+    generate = async (data) => {
         const result = await easyinvoice.createInvoice(data);
-        easyinvoice.download(this.state.order.releaseDate.split('T')[0]+'-'+this.state.restaurant.cif+'.pdf', result.pdf);
-	}
+        easyinvoice.download(this.state.order.releaseDate.split('T')[0] + '-' + this.state.restaurant.cif + '.pdf', result.pdf);
+    }
 
     render() {
         return (
-            <div class="center">
-                <img src={IMAGES.LOGO} className="logo" width="150" height="80" alt="" />
-                <div class="center">
-                    <div class="center">
-                        <div class="card">
-                            <div>
-                                <h5 class="text-center mb-4">PEDIDO</h5>
-                                <div className="subheading mb-5">
-                                    {this.CartTable(this.state.cart)}
-                                </div>
-                                <h5 class="text-center mb-4">PRECIO TOTAL: {this.state.order.price} €</h5>
-                            </div>
-                            <div><input type="submit" value="Factura" onClick={() => this.generate(this.state.bill)}/></div>
-                            <div class="columnsForIcons">
-								<Tooltip title="Cancelar" placement="top-start">
-                                    <FontAwesomeIcon icon={faLeftLong} font-size={20} color={"#000000"} onClick={() => this.back()} />
-                                </Tooltip>
-								</div>
+            <div className="center-log">
+                <div className="card-log">
+                    <img src={IMAGES.LOGO} className="centerImage img_logo" alt="" />
+                    <div>
+                        <h5 class="text-center mb-4">PEDIDO</h5>
+                        <div className="subheading mb-5">
+                            {this.CartTable(this.state.cart)}
                         </div>
+                        <h5 class="text-center mb-4">PRECIO TOTAL: {this.state.order.price} €</h5>
+                    </div>
+                    <div className='columns-rid'>
+                        <input type="submit" value="Factura" onClick={() => this.generate(this.state.bill)} />
+                    </div>
+                    <div class="columnsForIcons">
+                        <Tooltip title="Cancelar" placement="top-start">
+                            <FontAwesomeIcon icon={faLeftLong} font-size={20} color={"#000000"} onClick={() => this.back()} />
+                        </Tooltip>
                     </div>
                 </div>
             </div>

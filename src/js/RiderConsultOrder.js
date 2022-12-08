@@ -73,8 +73,8 @@ class RiderConsultOrder extends Component {
         })
     }
 
-    markAsDelivered(){
-        fetch(ROUTES.PROXY + '/order/modifyOrder/'+this.state.order.id, {
+    markAsDelivered() {
+        fetch(ROUTES.PROXY + '/order/modifyOrder/' + this.state.order.id, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -114,13 +114,13 @@ class RiderConsultOrder extends Component {
                 console.log(element);
                 return (
                     <tr>
-                        <td>{(this.findArrayElementById(this.state.plates, Number(element.plateID))).name}</td>
-                        <td>{element.quantity}</td>
-                        <td>{element.quantity * (this.findArrayElementById(this.state.plates, Number(element.plateID))).cost}€</td>
+                        <td data-label="Nombre">{(this.findArrayElementById(this.state.plates, Number(element.plateID))).name}</td>
+                        <td data-label="Cantidad">{element.quantity}</td>
+                        <td data-label="Coste">{element.quantity * (this.findArrayElementById(this.state.plates, Number(element.plateID))).cost}€</td>
                     </tr>
                 )
             }
-            )
+        )
 
         return (
             <Table striped bordered hover variant="dark">
@@ -163,25 +163,22 @@ class RiderConsultOrder extends Component {
 
     render() {
         return (
-            <div class="center">
-                <img src={IMAGES.LOGO} className="logo" width="150" height="80" alt="" />
-                <div class="center">
-                    <div class="center">
-                        <div class="card">
-                            <div>
-                                <h5 class="text-center mb-4">PEDIDO</h5>
-                                <div className="subheading mb-5">
-                                    {this.CartTable(this.state.cart)}
-                                </div>
-                                <h5 class="text-center mb-4">PRECIO TOTAL: {this.state.order.price} €</h5>
-                            </div>
-                            <div class="columns"><input type="submit" value="Entregar" onClick={() => this.markAsDelivered()} /></div>
-                            <div class="columnsForIcons">
-								<Tooltip title="Cancelar" placement="top-start">
-                                    <FontAwesomeIcon icon={faLeftLong} font-size={20} color={"#000000"} onClick={() => this.back()} />
-                                </Tooltip>
-								</div>
+            <div class="center-log">
+                
+                <div class="card-log">
+                    <img src={IMAGES.LOGO} className="logo img_logo" alt="" />
+                    <div>
+                        <h5 class="text-center mb-4">PEDIDO</h5>
+                        <div className="subheading mb-5">
+                            {this.CartTable(this.state.cart)}
                         </div>
+                        <h5 class="text-center mb-4">PRECIO TOTAL: {this.state.order.price} €</h5>
+                    </div>
+                    <div class="columns"><input type="submit" value="Entregar" onClick={() => this.markAsDelivered()} /></div>
+                    <div class="columnsForIcons">
+                        <Tooltip title="Cancelar" placement="top-start">
+                            <FontAwesomeIcon icon={faLeftLong} font-size={20} color={"#000000"} onClick={() => this.back()} />
+                        </Tooltip>
                     </div>
                 </div>
             </div>

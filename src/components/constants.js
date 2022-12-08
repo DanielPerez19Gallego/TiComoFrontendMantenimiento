@@ -6,8 +6,8 @@ export const ROUTES = {
     ADDADMIN: '/admin/addAdmin',
     RESTAURANT: '/admin/consultRestaurant/:id',
     //PROXY: 'https://ticomo01.herokuapp.com'
-    //PROXY: 'http://localhost:8080'
-    PROXY: 'https://notable-wenonah-csreal22.koyeb.app'
+    PROXY: 'http://localhost:8082'
+    //PROXY: 'https://scary-betsey-danisok324.koyeb.app'
 }
 
 export const IMAGES = {

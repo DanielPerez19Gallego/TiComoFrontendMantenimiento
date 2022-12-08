@@ -57,7 +57,7 @@ class RiderPage extends Component {
 
     state = {
         rider: {}, globalOrders: [], myOrders: [], restaurants: [], disabled: true, disabledMatricula: true,
-        value: (this.props.location.value == undefined) ? 2 : this.props.location.value
+        value: (this.props.location.value == undefined) ? 1 : this.props.location.value
     }
 
     /* INITIALIZER */
@@ -158,16 +158,16 @@ class RiderPage extends Component {
             (element) => {
                 return (
                     <tr>
-                        <td>{(this.findArrayElementById(this.state.restaurants, Number(element.restaurantID))).name}</td>
-                        <td>{element.releaseDate.split('T')[0]}</td>
-                        <td>{element.releaseDate.split('T')[1]}</td>
-                        <td><AddCircleIcon onClick={() => this.selectOrder(element)} /></td>
+                        <td data-label="Restaurante">{(this.findArrayElementById(this.state.restaurants, Number(element.restaurantID))).name}</td>
+                        <td data-label="Fecha">{element.releaseDate.split('T')[0]}</td>
+                        <td data-label="Hora">{element.releaseDate.split('T')[1]}</td>
+                        <td data-label="Añadir Pedido"><AddCircleIcon onClick={() => this.selectOrder(element)} /></td>
                     </tr>
                 )
             }
         )
         return (
-            <div style={{ width: "695px" }}>
+            <div>
             <Table striped bordered hover variant="light">
                 <thead>
                     <tr>
@@ -220,10 +220,10 @@ class RiderPage extends Component {
             (element) => {
                 return (
                     <tr>
-                        <td>{(this.findArrayElementById(this.state.restaurants, Number(element.restaurantID))).name}</td>
-                        <td>{element.releaseDate.split('T')[0]}</td>
-                        <td>{element.releaseDate.split('T')[1]}</td>
-                        <td><button
+                        <td data-label="Restaurante">{(this.findArrayElementById(this.state.restaurants, Number(element.restaurantID))).name}</td>
+                        <td data-label="Fecha">{element.releaseDate.split('T')[0]}</td>
+                        <td data-label="Hora">{element.releaseDate.split('T')[1]}</td>
+                        <td data-label="Estado"><button
                             className="button-custom"
                             onClick={() => this.goToOrder(element)}
                         >
@@ -234,7 +234,7 @@ class RiderPage extends Component {
             }
         )
         return (
-            <div style={{ width: "695px" }}>
+            <div>
             <Table striped bordered hover variant="light">
                 <thead>
                     <tr>
@@ -375,84 +375,85 @@ class RiderPage extends Component {
 
     render() {
         return (
-            <div>
-                <><Box
-                    sx={{ flexGrow: 1, bgcolor: 'white', height: 800, display: 'flex', width: 1000 }}
-                >
-                    <Tabs
-                        orientation='vertical'
-                        variant="fullwidth"
-                        value={this.state.value}
-                        onChange={this.handleTabChange}
-                        aria-label="full width tabs example"
-                        TabIndicatorProps={{ sx: { backgroundColor: '#D6C2B5' } }}
-                        sx={{ borderRight: 1, borderColor: 'divider', backgroundColor: '#3F322B', width: 250 }}
-                        textColor="white"
-                        centered
-                    >
-                        <img src={IMAGES.FONDO_TRANSPARENTE} className="logo" width="160" height="50" alt="" />
-                        <img src={IMAGES.LOGO_FONDO} className="logo" width="160" height="90" alt="" />
-                        <Tab label={<span style={{ color: '#D6C2B5' }}>Pedidos</span>} {...a11yProps(2)} />
-                        <Tab label={<span style={{ color: '#D6C2B5' }}>Mis Pedidos</span>} {...a11yProps(3)} />
-                        <Tab label={<span style={{ color: '#D6C2B5' }}>Perfil</span>} {...a11yProps(4)} />
-                        <FontAwesomeIcon icon={faRightFromBracket} font-size={20} color={"#D6C2B5"} onClick={() => this.logout()} />
-                    </Tabs>
+            <div className='cont-gest'>
+                <div className='cont-gest-header'>
+                    <Box>
+                        <Tabs className="menu-tabs"
+                            orientation='vertical'
+                            value={this.state.value}
+                            onChange={this.handleTabChange}
+                            aria-label="full width tabs example"
+                            TabIndicatorProps={{ sx: { backgroundColor: '#D6C2B5' } }}
+                        >
+                            <img src={IMAGES.LOGO_FONDO} className="img_logo" alt="" id="foto-tabs" />
+                            <Tab label={<span style={{ color: '#D6C2B5' }}>Pedidos</span>} {...a11yProps(2)} />
+                            <Tab label={<span style={{ color: '#D6C2B5' }}>Mis Pedidos</span>} {...a11yProps(3)} />
+                            <Tab label={<span style={{ color: '#D6C2B5' }}>Perfil</span>} {...a11yProps(4)} />
+                            <FontAwesomeIcon icon={faRightFromBracket} font-size={20} color={"#D6C2B5"} onClick={() => this.logout()} />
+                        </Tabs>
 
-                    <TabPanel value={this.state.value} index={2}>
-                    <h2>TODOS LOS PEDIDOS</h2>
+
+                    </Box>
+                </div>
+                <div className='cont-gest-body'>
+                    <TabPanel
+                        value={this.state.value} index={1}>
+                        <h2>TODOS LOS PEDIDOS</h2>
                         {this.GlobalOrdersTable(this.state.globalOrders)}
                     </TabPanel>
 
-                    <TabPanel value={this.state.value} index={3}>
-                    <h2>MIS PEDIDOS</h2>
+                    <TabPanel
+                        value={this.state.value} index={2}>
+                        <h2>MIS PEDIDOS</h2>
                         {this.MyOrdersTable(this.state.myOrders)}
                     </TabPanel>
 
-                    <TabPanel value={this.state.value} index={4}>
+                    <TabPanel
+                        value={this.state.value} index={3}>
                         <h2>MI PERFIL</h2>
-                        <div class="centerInTab">
-                            <div class="centerInTab">
-                                <div class="columns">
-                                    <div class='cardInTab'>
+                        <div className="centerInTab-rid">
+                            <div className="centerInTab-rid">
+                                <div className="columns-rid">
+                                    <div className='cardInTab'>
 
                                         <Tooltip title="No puede contener: [1-9]/*@..." placement="top-start">
-                                            <label class="form-control-label px-0">Nombre<span class="text-danger"> *</span></label>
+                                            <label className="form-control-label px-0">Nombre<span className="text-danger"> *</span></label>
                                         </Tooltip>
                                         <input type="text" name="name" placeholder={this.state.rider.name} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
-                                        <label class="text-danger-custom" id="name"></label>
+                                        <label className="text-danger-custom" id="name"></label>
 
                                         <Tooltip title="No puede contener: [1-9]/*@..." placement="top-start">
-                                            <label class="form-control-label px-0">Apellidos<span class="text-danger"> *</span></label>
+                                            <label className="form-control-label px-0">Apellidos<span className="text-danger"> *</span></label>
                                         </Tooltip>
-                                        <input class="Fields" type="text" name="surname" placeholder={this.state.rider.surname} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
-                                        <label class="text-danger-custom" id="surname"></label>
-                                        
-                                        <label class="form-control-label px-0">Email<span class="text-danger"> *</span></label>
-                                        <input class="Fields" type="text" name="email" placeholder={this.state.rider.email} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
-                                        <label class="text-danger-custom" id="email"></label>
+                                        <input className="Fields" type="text" name="surname" placeholder={this.state.rider.surname} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
+                                        <label className="text-danger-custom" id="surname"></label>
 
-                                    </div><div class='cardInTab'>
+                                        <label className="form-control-label px-0">Email<span className="text-danger"> *</span></label>
+                                        <input className="Fields" type="text" name="email" placeholder={this.state.rider.email} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
+                                        <label className="text-danger-custom" id="email"></label>
 
+                                    </div>
+                                    <div className='cardInTab'>
                                         <Tooltip title="Debe tener 8 números y 1 letra" placement="top-start">
-                                            <label class="form-control-label px-0">NIF<span class="text-danger"> *</span></label>
+                                            <label className="form-control-label px-0">NIF<span className="text-danger"> *</span></label>
                                         </Tooltip>
-                                        <input class="Fields" type="text" name="nif" placeholder={this.state.rider.nif} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
-                                        <label class="text-danger-custom" id="nif"></label>
+                                        <input className="Fields" type="text" name="nif" placeholder={this.state.rider.nif} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
+                                        <label className="text-danger-custom" id="nif"></label>
 
                                         <Tooltip title="Si conduce un coche, moto o bici" placement="top-start">
-                                            <label class="form-control-label px-0">Tipo de vehículo<span class="text-danger"> *</span></label>
+                                            <label className="form-control-label px-0">Tipo de vehículo<span className="text-danger"> *</span></label>
                                         </Tooltip>
-                                        <input class="Fields" type="text" name="vehicleType" placeholder={this.state.rider.vehicleType} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
+                                        <input className="Fields" type="text" name="vehicleType" placeholder={this.state.rider.vehicleType} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
 
                                         <Tooltip title="Debe tener 4 números y 3 letras" placement="top-start">
-                                            <label class="form-control-label px-0">Matrícula<span class="text-danger"> *</span></label>
+                                            <label className="form-control-label px-0">Matrícula<span className="text-danger"> *</span></label>
                                         </Tooltip>
-                                        <input class="Fields" type="text" name="licensePlate" placeholder={(this.state.disabled) ? "XXXXXXX" : this.state.rider.licensePlate} disabled={(this.state.disabled || this.state.disabledMatricula) ? "disabled" : ""} required="" onChange={this.handleChange} />
-                                        <label class="text-danger-custom" id="license"></label>
+                                        <input className="Fields" type="text" name="licensePlate" placeholder={(this.state.disabled) ? "XXXXXXX" : this.state.rider.licensePlate} disabled={(this.state.disabled || this.state.disabledMatricula) ? "disabled" : ""} required="" onChange={this.handleChange} />
+                                        <label className="text-danger-custom" id="license"></label>
 
                                         <div>
-                                            <label class="form-control-label px-0">Carné<span class="text-danger"> *</span></label>
-                                            <input class="Fields" type="checkbox" name="license" defaultChecked={this.state.rider.license} disabled={(this.state.disabled) ? "disabled" : ""} required="" onClick={this.handleChangeCheckBox} />
+                                            <label className="form-control-label px-0">Carné<span className="text-danger"> *</span></label>
+                                            <input className="Fields" type="checkbox" name="license" defaultChecked={this.state.rider.license} disabled={(this.state.disabled) ? "disabled" : ""} required="" onClick={this.handleChangeCheckBox} />
                                         </div>
                                     </div>
                                     <Tooltip title="Editar" placement="top-start">
@@ -462,19 +463,17 @@ class RiderPage extends Component {
                             </div>
 
                         </div>
-                        <div class="centerInTabV2">
+                        <div className="centerInTab-rid">
                             <div hidden={this.state.disabled ? true : false}>
                                 <label>¿Desea guardar los cambios?</label>
-                                <div class="columns">
+                                <div className="columns-rid">
                                     <input type="submit" value="ACEPTAR" onClick={() => this.modifyRider()} />
                                     <input type="submit" value="CANCELAR" onClick={() => this.handleModifyClick()} />
                                 </div>
                             </div>
                         </div>
                     </TabPanel>
-
-                </Box>
-                </>
+                </div>
             </div>
         )
     }

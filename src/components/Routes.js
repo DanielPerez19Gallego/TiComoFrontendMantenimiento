@@ -22,6 +22,10 @@ import AdminConsultOrder from '../js/AdminConsultOrder';
 import Rider from '../js/RiderPage';
 import RiderConsultOrder from '../js/RiderConsultOrder';
 import ClientConsultPlate from '../js/ClientConsultPlate';
+import Telefono from '../js/TelefonoPage';
+import TelefonoConsultOrder from '../js/TelefonoConsultOrder';
+import TelefonoConsultRestaurant from '../js/TelefonoConsultRestaurant';
+import TelefonoModifyOrder from '../js/TelefonoModifyOrder';
 import { ROUTES, ROLES} from './constants';
 import { PrivateRoute } from './privateRoute';
 
@@ -53,6 +57,11 @@ function Routes() {
 
         <Route exact path="/rider/consultOrder" component={RiderConsultOrder} />
         <PrivateRoute path="/rider" roles={[ROLES.RIDER]} component={Rider} />
+
+        <Route exact path="/telefono/consultRestaurant" component={TelefonoConsultRestaurant} />
+        <Route exact path="/telefono/consultOrder" component={TelefonoConsultOrder} />
+        <Route exact path="/telefono/modifyOrder" component={TelefonoModifyOrder} />
+        <PrivateRoute path="/telefono" roles={[ROLES.TELEFONO]} component={Telefono} />
 
         <Route path="*" component={PageNotFound} />
       </Switch>

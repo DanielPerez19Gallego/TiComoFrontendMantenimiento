@@ -13,9 +13,11 @@ class Login extends Component {
 			if (authenticationService.currentUserValue.role == ROLES.ADMIN) {
 				this.props.history.push(ROUTES.ADMIN);
 			} else if (authenticationService.currentUserValue.role == ROLES.RIDER) {
-				this.props.history.push(ROUTES.WELCOME);
-			} else {
+				this.props.history.push('/rider');
+			} else if (authenticationService.currentUserValue.role == ROLES.CLIENT) {
 				this.props.history.push('/client');
+			} else {
+				this.props.history.push('/telefono');
 			}
 		}
 	}
@@ -40,12 +42,13 @@ class Login extends Component {
 						} else if (authenticationService.currentUserValue.role == ROLES.CLIENT) {
 							this.props.history.push("/client");
 						} else {
-							alert('Inicio de sesion como atencion telefonica');
+							//alert('Inicio de sesion como atencion telefonica');
+							this.props.history.push("/telefono");
 						}
 					}
 				},
 				error => {
-					alert(error);	
+					alert(error);
 					//alert("Email o contraseña no válido");
 				}
 			);
@@ -63,25 +66,25 @@ class Login extends Component {
 
 	render() {
 		return (
-			<div className="center">
-				<div className="center">
-					<div className="center">
-						<div class="card">
-							<img src={IMAGES.LOGO} className="centerImage" width="150" height="80" alt="" />
-							<h5 class="text-center mb-4">BIENVENIDO A TICOMO</h5>
-							<label class="form-control-label px-0">Email<span class="text-danger"> *</span></label>
-							<input class="text" type="text" name="email" placeholder="Correo electrónico*" alt="" onChange={this.handleChange} />
-							<label class="form-control-label px-0">Contraseña<span class="text-danger"> *</span></label>
-							<input class="text" type="password" name="password" placeholder="Contraseña*" alt="" onChange={this.handleChange} />
-							<div class="columns">
-								<input type="submit" value="LOGIN" onClick={() => this.login()} />
-							</div>
-							<label className="anim">
-								<Link to="/register"> ¿Aún no estás registrado? </Link>
-							</label>
-
-						</div>
+			<div className="center-log">
+				<div className="card-log">
+					<img src={IMAGES.LOGO} className="centerImage img_logo" alt="" />
+					<h5 className="text-center mb-4">BIENVENIDO A TICOMO</h5>
+					<label className="form-control-label px-0">
+						Email<span className="text-danger"> *</span>
+					</label>
+					<input className="text" type="text" name="email" placeholder="Correo electrónico*" alt="" onChange={this.handleChange} />
+					<label className="form-control-label px-0">
+						Contraseña<span className="text-danger"> *</span>
+					</label>
+					<input className="text" type="password" name="password" placeholder="Contraseña*" alt="" onChange={this.handleChange} />
+					<div className="columns">
+						<input type="submit" value="LOGIN" onClick={() => this.login()} />
 					</div>
+					<label className="anim">
+						<Link to="/register"> ¿Aún no estás registrado? </Link>
+					</label>
+
 				</div>
 			</div>
 		)

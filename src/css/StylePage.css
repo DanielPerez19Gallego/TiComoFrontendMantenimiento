@@ -1,11 +1,26 @@
-
 /* Define el background de todo 
 y pone sans-serif como tipografía determinada */
 body {
     background-image: url("https://firebasestorage.googleapis.com/v0/b/ticomo01.appspot.com/o/images%2FBackground.png?alt=media&token=5a7f79c7-c7bb-4717-a9c3-d3e52680b147");
-    background-size: cover; 
+    background-size: cover;
     background-attachment: fixed;
     font-family: 'Roboto', sans-serif;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: #3F322B;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+
+    background-color: #8DC26F;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: #3F322B;
 }
 
 /* Tratamiento del logo de la empresa
@@ -40,6 +55,7 @@ body {
     margin-top: 80px;
     padding: 0px;
 }
+
 .centerInTabV2 {
     display: block;
     margin-left: 15px;
@@ -47,6 +63,7 @@ body {
     margin-top: 0px;
     padding: 0px;
 }
+
 .centerImage {
     display: block;
     margin-left: 173px;
@@ -62,18 +79,17 @@ body {
 */
 .card {
     word-wrap: break-word;
-    background-color: rgb(255, 255, 255);
+    background: white;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     border-radius: 0.25rem;
     padding: 30px 40px;
     box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.7);
-    margin-right: 325px;
-    margin-left: 325px;
-    margin-bottom: 50px;
-    position: relative;
+    margin: 0 auto 50px auto;
     display: flex;
     flex-direction: column;
+    max-width: 500px;
+    min-width: 150px;
 }
 
 /* Estilo de la box que contiene los elementos de los formularios dentro de tabs */
@@ -124,6 +140,14 @@ body {
     margin-bottom: 10px;
     margin-left: 10px;
     display: flex;
+}
+
+.tabPanelOrder {
+    overflow-y: scroll;
+}
+
+.espaciado {
+    justify-content: space-around;
 }
 
 /* Características de las labels: */
@@ -193,12 +217,12 @@ input[type="submit"]:hover {
 
 .form-control {
     border: 1px solid black
-  }
-  
-  .text-danger-custom {
+}
+
+.text-danger-custom {
     color: red;
     font-size: 1rem;
-  }
+}
 
 
 /* CHECKBOX */
@@ -237,11 +261,564 @@ h1,
     color: #343a40;
 }
 
-h2, .h2 {
+h2,
+.h2 {
     font-size: calc(1.475rem + 2.7vw);
-  }
-  @media (min-width: 1200px) {
-    h2, .h2 {
-      font-size: 3.5rem;
+}
+
+@media (min-width: 1200px) {
+
+    h2,
+    .h2 {
+        font-size: 3.5rem;
     }
-  }
+}
+
+/* Estilos del mantenimiento */
+/*Login y Registro*/
+.img_logo {
+    width: 150px;
+    height: 80px;
+    margin: auto auto;
+}
+
+.card-log {
+    word-wrap: break-word;
+    background: white;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    padding: 30px 40px;
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.7);
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    min-width: 250px;
+    height: auto;
+}
+
+.card-log2 {
+    word-wrap: break-word;
+    background: white;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    padding: 30px 40px;
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.7);
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 80%;
+    min-width: 250px;
+    height: auto;
+}
+
+.center-log {
+    display: flex;
+    justify-content: center;
+    vertical-align: center;
+    /*background: red;*/
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.columns-log {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+@media only screen and (max-width: 600px) {
+    .columns-log {
+        display: block;
+    }
+}
+
+/*rider*/
+.cont-gest {
+    display: flex;
+    width: 90%;
+    height: 90vh;
+    background: green;
+}
+
+.cont-gest-body,
+.cont-gest-body2 {
+    background: white;
+    height: 90vh;
+    overflow: scroll;
+    padding: 16px;
+    width: 100%;
+}
+
+.cont-gest-header,
+.cont-gest-header2 {
+    background: #3F322B;
+    width: 250px;
+}
+
+.menu-tabs {
+    color: white;
+    text-align: center;
+    border-right: 1px;
+    border-color: #3F322B;
+
+}
+
+.box-tabs {
+    background: white;
+    height: 90vh;
+    display: flex;
+    width: 100%;
+    flex-grow: 1
+}
+
+#foto-tabs,
+#foto-tabs-cli {
+    margin-top: 50px;
+}
+
+.tabpanel-tabs {
+    width: 100%;
+}
+
+.centerInTab-rid {
+    display: block;
+    margin: 4px;
+    padding: 0px;
+    /*background: yellow;*/
+}
+
+.columns-rid {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.columns-rid input,
+.columns-rid div input {
+    margin: 2px;
+}
+
+.izq {
+    text-align: end;
+}
+
+/*Cliente*/
+.cont-consult-res {
+    width: 100%;
+    height: 90vh;
+    /*background: red;*/
+    display: flex;
+    flex-direction: row;
+}
+
+.cont-consult-res_datos {
+    width: 35%;
+    /*background: green;*/
+    padding: 10px;
+}
+
+#datos_col {
+    height: calc(90vh - 190px);
+}
+
+.cont-consult-res_carta {
+    width: 65%;
+    /*background: yellow;*/
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.cont-consult-res_platos {
+    width: 60%;
+    /*background: orange;*/
+    padding-right: 5px;
+}
+
+.cont-consult-res_pedido {
+    width: 40%;
+    /*background: purple;*/
+    padding-left: 5px;
+}
+
+.cardInColumn-cli {
+    word-wrap: break-word;
+    background-color: white;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    padding: 30px 40px;
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.7);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: calc(90vh - 20px);
+    overflow-y: auto;
+}
+
+.cont-platos-carta {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.plato-carta {
+    min-width: 190px;
+    max-width: 300px;
+}
+
+#imgPlatos {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: space-around !important;
+}
+
+#cont-ped-cli,
+#cont-ped-ad {
+    height: fit-content;
+    max-height: calc(90vh - 20px);
+}
+
+#cont-ped-cli2 {
+    height: fit-content;
+    max-height: calc(90vh - 190px);
+}
+
+#cont-ped-email {
+    height: 160px;
+    margin-top: 10px;
+    overflow-y: hidden !important;
+}
+
+.columnsForIcons-cli {
+    display: flex;
+}
+
+.img-plato-det {
+    width: 100%;
+    max-width: 350px;
+    max-height: 180px;
+}
+
+.ancho-completo {
+    width: 100%;
+}
+
+.centrado {
+    text-align: center;
+}
+
+/*responsive escritorios normales y tablet horizontales*/
+@media only screen and (max-width: 1200px) {
+    .cont-consult-res_carta {
+        flex-direction: column;
+    }
+
+    .cont-consult-res_platos {
+        width: 100%;
+        padding-right: 0px;
+        height: 50vh;
+    }
+
+    .cont-consult-res_pedido {
+        width: 100%;
+        height: calc(35vh - 10px);
+        padding-top: 10px;
+        padding-left: 0px;
+    }
+
+    #platosCard {
+        height: 50vh;
+    }
+
+    #cont-ped-cli,
+    #cont-ped-ad {
+        height: 34vh;
+    }
+
+    /*.cont-carta-p ul{
+        width: fit-content;
+    }*/
+}
+
+@media only screen and (max-width: 900px) {
+
+    /*tabla responsive*/
+    table {
+        width: 100%;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tr:nth-of-type(2n) {
+        background-color: inherit;
+    }
+
+    tr td:first-child {
+        /*background: #f0f0f0;*/
+        font-weight: bold;
+        font-size: 1.3em;
+    }
+
+    tbody td {
+        display: block;
+        text-align: center;
+    }
+
+    tbody td:before {
+        content: attr(data-label);
+        display: block;
+        text-align: center;
+        opacity: 0.8;
+    }
+
+    .izq {
+        text-align: center;
+    }
+
+    /*#imgPlatos {
+        grid-template-columns: repeat(1, 1fr) !important;
+        display: flex !important;
+    }*/
+
+    .buttonWelcome {
+        margin: 2px 0 !important;
+    }
+}
+
+/*responsive moviles verticales*/
+@media only screen and (max-width: 768px) {
+    .cont-gest {
+        display: block;
+        width: 100%;
+        height: 95vh;
+        /*background: green;*/
+    }
+
+    .cont-gest-header {
+        width: 100%;
+        height: 280px;
+        /*min-height: 150px;
+        max-height: 20vh;*/
+    }
+
+    .cont-gest-header2 {
+        width: 100%;
+        height: 324px;
+    }
+
+    #foto-tabs,
+    #foto-tabs-cli {
+        margin-top: 0px;
+    }
+
+    .menu-tabs {
+        display: flex;
+        padding: 16px 0;
+    }
+
+    .menu-tabs button {
+        margin: 0 auto;
+    }
+
+    .cont-gest-body {
+        height: calc(100vh - 280px);
+    }
+
+    .cont-gest-body2 {
+        height: calc(100vh - 324px);
+    }
+
+    /**/
+    .columns-rid {
+        flex-direction: column;
+    }
+
+    .columns-rid input,
+    .columns-rid div input {
+        margin: 2px 0;
+    }
+
+    /*cliente*/
+    .cardInColumn-cli {
+        height: fit-content;
+    }
+
+    .cont-consult-res {
+        flex-direction: column;
+    }
+
+    .cont-consult-res_datos {
+        width: 100%;
+        height: fit-content;
+    }
+
+    .cont-consult-res_carta {
+        width: 100%;
+
+    }
+
+    .cont-consult-res_platos {
+        width: 100%;
+        padding-right: 0px;
+        height: fit-content;
+    }
+
+    .cont-consult-res_pedido {
+        width: 100%;
+        height: fit-content;
+        padding-top: 10px;
+        padding-left: 0px;
+    }
+
+    #platosCard,
+    #cont-ped-cli,
+    #cont-ped-ad {
+        height: fit-content;
+        max-height: fit-content;
+    }
+
+    .plato-carta {
+        width: 100%;
+    }
+}
+
+.css-1wcaknn {
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+.imgPreview {
+    width: 100%;
+    max-width: 350px;
+    max-height: 290px;
+}
+
+.inputFile {
+    width: 100%;
+    max-width: 350px;
+}
+
+#cont-ped-ad {
+    padding: 30px 8px;
+}
+
+/*Welcome*/
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #8f9aa4;
+    /* Tono claro de azul */
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cont-trabajos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 16px;
+}
+
+.card,
+.trabajo {
+    background-color: #895a28a3;
+    /* Tono claro de naranja */
+    padding: 32px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    margin: 4px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.buttonWelcome {
+    font-size: .9em;
+    color: white;
+    background: #3F322B;
+    outline: none;
+    border: 1px solid #000000;
+    cursor: pointer;
+    padding: 0.9em;
+    -webkit-appearance: none;
+    width: 100%;
+    letter-spacing: 4px;
+    margin-right: 10px;
+    margin-left: 10px;
+    letter-spacing: 3px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.buttonWelcome:hover {
+    -webkit-transition: .5s all;
+    -moz-transition: .5s all;
+    -o-transition: .5s all;
+    -ms-transition: .5s all;
+    transition: .5s all;
+    background: #8DC26F;
+    color: black;
+}
+
+.imagenLoco {
+    width: 150px;
+    height: 150px;
+}
+
+.contenedorExplicacion,
+.card {
+
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    border: 1px solid #333;
+    box-shadow: 4px 4px 8px #333;
+}
+
+.prueba {
+    color: #333;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.botones-home{
+    margin: 16px;
+}
+
+#nombre-logo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.foto-welcome{
+    margin-top: 0;
+}
+
+.error404{
+    text-align: center;
+}

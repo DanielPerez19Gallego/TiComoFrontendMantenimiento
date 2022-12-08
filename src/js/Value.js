@@ -28,24 +28,24 @@ class Value extends Component {
 	}
 
 	componentDidMount() {
-        fetch(ROUTES.PROXY + '/order/showOrderRate/' + this.state.order.id, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-        }).then((response) => {
+		fetch(ROUTES.PROXY + '/order/showOrderRate/' + this.state.order.id, {
+			method: 'GET',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+		}).then((response) => {
 			if (response.status == 200) {
 				this.setState({ disabled: true });
 				return response.json();
 			}
-        }).then(data => {
-            this.setState({ orderRate: data })
+		}).then(data => {
+			this.setState({ orderRate: data })
 			this.setState({ description: this.state.orderRate.description });
-        }).catch((err) => {
-            console.log(err);
-        })
-    }
+		}).catch((err) => {
+			console.log(err);
+		})
+	}
 
 	rateRestaurant = (event, newRating) => {
 		this.setState({ rateRestaurant: newRating + 1 });
@@ -57,9 +57,9 @@ class Value extends Component {
 
 	valueorder = async () => {
 
-		if(this.state.disabled){
+		if (this.state.disabled) {
 			this.props.history.push("/client");
-		}else{
+		} else {
 			fetch(ROUTES.PROXY + '/order/rateOrder', {
 				method: 'POST',
 				headers: {
@@ -82,7 +82,7 @@ class Value extends Component {
 				}
 				return response.text();
 			}).then((responseJson) => {
-					responseJson = JSON.parse(responseJson);
+				responseJson = JSON.parse(responseJson);
 			}).catch((err) => {
 				console.log(err);
 			})
@@ -97,8 +97,8 @@ class Value extends Component {
 	}
 
 	handleChange = (event) => {
-        this.setState({ description: event.target.value });
-    };
+		this.setState({ description: event.target.value });
+	};
 
 	onClick(e) {
 		e.preventDefault();
@@ -106,50 +106,42 @@ class Value extends Component {
 
 	render() {
 		return (
-			<div class="center">
-				<img src={IMAGES.LOGO} className="logo" width="150" height="80" alt="" />
-				<div class="center">
-					<div class="center">
-						<div>
-							<div class="card">
-								<h5 class="text-center mb-4">VALORAR PEDIDO</h5>
-								<label class="form-control-label px-0"> Restaurante </label>
-								<Rating
-									onClick={this.rateRestaurant}
-									initialValue={(this.state.orderRate == undefined)? 0 : this.state.orderRate.rateRestaurant}
-									size={50}
-									transition
-									showTooltip
-									fillColorArray={fillColorArray}
-									readonly={this.state.disabled}
-								/>
-								<label class="form-control-label px-0"> Rider </label>
-								<Rating
-									onClick={this.rateRider}
-									initialValue={(this.state.orderRate == undefined)? 0 : this.state.orderRate.rateRider}
-									size={50}
-									transition
-									showTooltip
-									fillColorArray={fillColorArray}
-									readonly={this.state.disabled}
-								/>
-								<br></br>
-								<TextField
-          							id="filled-multiline-static"
-          							label="Comentario"
-          							multiline
-									value={this.state.description}
-									onChange={this.handleChange}
-          							rows={4}
-          							variant="filled"
-									disabled={this.state.disabled}
-        						/>
-								<div class="columns">
-									<input type="submit" value="ACEPTAR" onClick={() => this.valueorder()} />
-									<input type="submit" value="CANCELAR" onClick={() => this.back()} />
-								</div>
-							</div>
-						</div>
+			<div class="center-log">
+				<div class="card-log">
+					<img src={IMAGES.LOGO} className="logo img_logo" alt="" />
+					<h5 class="text-center mb-4">VALORAR PEDIDO</h5>
+					<label class="form-control-label px-0"> Restaurante </label>
+					<Rating
+						onClick={this.rateRestaurant}
+						initialValue={(this.state.orderRate == undefined) ? 0 : this.state.orderRate.rateRestaurant}
+						transition
+						showTooltip
+						fillColorArray={fillColorArray}
+						readonly={this.state.disabled}
+					/>
+					<label class="form-control-label px-0"> Rider </label>
+					<Rating 
+						onClick={this.rateRider}
+						initialValue={(this.state.orderRate == undefined) ? 0 : this.state.orderRate.rateRider}
+						transition
+						showTooltip
+						fillColorArray={fillColorArray}
+						readonly={this.state.disabled}
+					/>
+					<br></br>
+					<TextField
+						id="filled-multiline-static"
+						label="Comentario"
+						multiline
+						value={this.state.description}
+						onChange={this.handleChange}
+						rows={4}
+						variant="filled"
+						disabled={this.state.disabled}
+					/>
+					<div class="columns-rid">
+						<input type="submit" value="ACEPTAR" onClick={() => this.valueorder()} />
+						<input type="submit" value="CANCELAR" onClick={() => this.back()} />
 					</div>
 				</div>
 			</div>

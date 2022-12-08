@@ -45,7 +45,7 @@ class ConsultRestaurant extends Component {
 			if ([400].indexOf(response.status) !== -1) {
 				this.props.history.push({
 					pathname: '/admin',
-					value: 3,
+					value: 4,
 				});
 			}
 			return response.json();
@@ -89,9 +89,9 @@ class ConsultRestaurant extends Component {
 	/* TABLES */
 	PlatesTable = (data) => {
 		return (
-			<ImageList sx={{ width: 390, height: 450 }}>
+			<ImageList className='cont-platos-carta' id='imgPlatos'>
 				{data.map((element) => (
-					<ImageListItem key={element.img}>
+					<ImageListItem className='plato-carta' key={element.img}>
 						<img
 							src={`${element.photo}?w=248&fit=crop&auto=format`}
 							srcSet={`${element.photo}?w=248&fit=crop&auto=format&dpr=2 2x`}
@@ -125,8 +125,7 @@ class ConsultRestaurant extends Component {
 				console.log(element);
 				return (
 					<tr>
-						<td>{counter++}</td>
-						<td>
+						<td data-label="Día">
 							<button
 								className="button-custom-white"
 								onClick={() => this.goToOrder(element)}
@@ -134,8 +133,8 @@ class ConsultRestaurant extends Component {
 								{element.releaseDate.split('T')[0]}
 							</button>
 						</td>
-						<td>{element.releaseDate.split('T')[1].substring(0, 8)}</td>
-						<td>{element.state}</td>
+						<td data-label="Hora">{element.releaseDate.split('T')[1].substring(0, 8)}</td>
+						<td data-label="Estado">{element.state}</td>
 					</tr>
 				)
 			}
@@ -146,7 +145,6 @@ class ConsultRestaurant extends Component {
 				<Table striped bordered hover variant="dark">
 					<thead>
 						<tr>
-							<th>#</th>
 							<th>Dia</th>
 							<th>Hora</th>
 							<th>Estado</th>
@@ -187,7 +185,7 @@ class ConsultRestaurant extends Component {
 				if (response.status == 200) {
 					this.props.history.push({
 						pathname: '/admin',
-						value: 5,
+						value: 4,
 					});
 				}
 				return response.text();
@@ -224,8 +222,8 @@ class ConsultRestaurant extends Component {
 					alert("Cambios guardados correctamente");
 					this.props.history.push({
 						pathname: '/admin',
-						value: 5,
-					});				
+						value: 4,
+					});
 				}
 				return response.text();
 			})
@@ -248,7 +246,7 @@ class ConsultRestaurant extends Component {
 	back = () => {
 		this.props.history.push({
 			pathname: '/admin',
-			value: 5,
+			value: 4,
 		});
 	}
 
@@ -269,9 +267,14 @@ class ConsultRestaurant extends Component {
 	render() {
 		return (
 
-			<div class="row">
-				<div className="col-4">
-					<div class="cardInColumn">
+			<div className='cont-consult-res'>
+				<div className='cont-consult-res_datos'>
+					<div class="cardInColumn-cli">
+						<div class="columnsForIcons-cli">
+							<Tooltip title="Cancelar" placement="top-start">
+								<FontAwesomeIcon icon={faLeftLong} font-size={20} color={"#000000"} onClick={() => this.back()} />
+							</Tooltip>
+						</div>
 						<h5 class="text-center mb-4">INFORMACIÓN RESTAURANTE</h5>
 						<Tooltip title="No puede contener: [1-9]/*@..." placement="left-start">
 							<label class="form-control-label px-0">Nombre<span class="text-danger"> *</span></label>
@@ -310,45 +313,42 @@ class ConsultRestaurant extends Component {
 						<Rating
 							onClick={this.rateRestaurant}
 							initialValue={Math.round(this.state.restaurant.averageRate)}
-							size={50}
 							transition
 							fillColorArray={fillColorArray}
 							readonly={true}
 
 						/>
-						<div class="columns">
+						<div class="columns-rid">
 							<input type="submit" value="MODIFICAR" onClick={this.handleModifyClik.bind(this)} />
 							<input type="submit" value="ELIMINAR" onClick={() => this.deleteRestaurant()} />
 						</div>
 						<div hidden={this.state.disabled ? true : false}>
 							<label>¿Desea guardar los cambios?</label>
-							<div class="columns">
+							<div class="columns-rid">
 								<input type="submit" value="ACEPTAR" onClick={() => this.modifyRestaurant()} />
 								<input type="submit" value="CANCELAR" onClick={() => this.back()} />
 							</div>
 						</div>
-						<div class="columnsForIcons">
-							<Tooltip title="Editar" placement="top-start">
-								<FontAwesomeIcon icon={faLeftLong} font-size={20} color={"#000000"} onClick={() => this.back()} />
-							</Tooltip>
-						</div>
-					</div>
-				</div>
-				<div className="col-4">
-					<div class="cardInColumn">
-						<h5 class="text-center mb-4">CARTA DEL RESTAURANTE</h5>
-						<div className="subheading mb-5">
-							{this.PlatesTable(this.state.plates)}
-						</div>
-						<Link to={"/admin/consultRestaurant/" + this.state.restaurant.id + "/addPlate"}>Añadir un nuevo plato a la carta</Link>
 					</div>
 				</div>
 
-				<div className="col-4">
-					<div class="cardInColumn">
-						<h5 class="text-center mb-4">LISTA DE PEDIDOS</h5>
-						<div className="subheading mb-5">
-							{this.OrdersTable(this.state.orders)}
+				<div className='cont-consult-res_carta'>
+					<div className='cont-consult-res_platos'>
+						<div class="cardInColumn-cli" id="platosCard">
+							<h5 class="text-center mb-4">CARTA DEL RESTAURANTE</h5>
+							<div className="subheading">
+								{this.PlatesTable(this.state.plates)}
+							</div>
+							<Link to={"/admin/consultRestaurant/" + this.state.restaurant.id + "/addPlate"}>Añadir un nuevo plato a la carta</Link>
+						</div>
+					</div>
+
+					<div className='cont-consult-res_pedido'>
+						<div class="cardInColumn-cli" id="cont-ped-ad">
+							<h5 class="text-center mb-4">LISTA DE PEDIDOS</h5>
+							<div className="subheading mb-5">
+								{this.OrdersTable(this.state.orders)}
+							</div>
 						</div>
 					</div>
 				</div>

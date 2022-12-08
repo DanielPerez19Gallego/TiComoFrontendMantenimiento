@@ -96,14 +96,14 @@ class ClientConsultRestaurant extends Component {
                 this.state.totalPrice -= this.state.cart[plateID].price;
                 if (this.state.cart[plateID].quantity > 1) {
                     this.state.cart[plateID] = { "quantity": this.state.cart[plateID].quantity - 1, "price": this.state.cart[plateID].price }
-                }else{
+                } else {
                     delete this.state.cart[plateID];
                 }
                 break;
             }
             default:
         }
-        
+
         this.props.history.push()
 
     }
@@ -111,9 +111,10 @@ class ClientConsultRestaurant extends Component {
     /* TABLES */
     PlatesTable = (data) => {
         return (
-            <ImageList sx={{ width: 390, height: 450 }}>
+            <ImageList className='cont-platos-carta' id='imgPlatos'>
+
                 {data.map((element) => (
-                    <ImageListItem key={element.img}>
+                    <ImageListItem className='plato-carta' key={element.img}>
                         <img
                             src={`${element.photo}?w=248&fit=crop&auto=format`}
                             srcSet={`${element.photo}?w=248&fit=crop&auto=format&dpr=2 2x`}
@@ -123,7 +124,6 @@ class ClientConsultRestaurant extends Component {
                             style={{ cursor: 'pointer' }}
                         />
                         <ImageListItemBar
-
                             title={element.name}
                             subtitle={element.cost + '€'}
                             actionIcon={
@@ -149,9 +149,9 @@ class ClientConsultRestaurant extends Component {
             .map(([key, value]) => {
                 return (
                     <tr>
-                        <td>{(this.findArrayElementById(this.state.plates, Number(key))).name}</td>
-                        <td>{value.quantity}</td>
-                        <td>{value.quantity * value.price}€</td>
+                        <td data-label="Nombre">{(this.findArrayElementById(this.state.plates, Number(key))).name}</td>
+                        <td data-label="Cantidad">{value.quantity}</td>
+                        <td data-label="Coste">{value.quantity * value.price}€</td>
                     </tr>
                 )
             }
@@ -216,11 +216,11 @@ class ClientConsultRestaurant extends Component {
         });
     }
 
-    goToOrders(){
+    goToOrders() {
         console.log(this.state.cart);
         var mensaje = confirm("¿Desea guardar los cambios?");
         if (mensaje) {
-            fetch(ROUTES.PROXY +'/order/makeOrder/' + authenticationService.currentUserValue.id, {
+            fetch(ROUTES.PROXY + '/order/makeOrder/' + authenticationService.currentUserValue.id, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -238,22 +238,27 @@ class ClientConsultRestaurant extends Component {
                         pathname: '/client',
                         client: this.state.client,
                         restaurantID: this.state.restaurantID,
-                        value: 3
+                        value: 2
                     });
                 }
                 return response.text();
             })
-            .catch((err) => {
-                console.log(err);
-            })
+                .catch((err) => {
+                    console.log(err);
+                })
         }
     }
 
     render() {
         return (
-            <div class="row">
-                <div className='col-4'>
-                    <div class="cardInColumn">
+            <div className='cont-consult-res'>
+                <div className='cont-consult-res_datos'>
+                    <div class="cardInColumn-cli">
+                        <div class="columnsForIcons-cli">
+                            <Tooltip title="Cancelar" placement="top-start">
+                                <FontAwesomeIcon icon={faLeftLong} font-size={20} color={"#000000"} onClick={() => this.back()} />
+                            </Tooltip>
+                        </div>
                         <h5 class="text-center mb-4">INFORMACIÓN RESTAURANTE</h5>
                         <label class="form-control-label px-0">Nombre<span class="text-danger"> *</span></label>
                         <input type="text" name="name" placeholder={this.state.restaurant.name} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
@@ -273,38 +278,34 @@ class ClientConsultRestaurant extends Component {
                         <Rating
                             onClick={this.rateRestaurant}
                             initialValue={this.state.restaurant.averageRate}
-                            size={50}
                             transition
                             fillColorArray={fillColorArray}
                             readonly={true}
-
                         />
-                        <div class="columnsForIcons">
-                        <Tooltip title="Cancelar" placement="top-start">
-                            <FontAwesomeIcon icon={faLeftLong} font-size={20} color={"#000000"} onClick={() => this.back()} />
-                        </Tooltip>
-                        </div>
                     </div>
                 </div>
 
-                <div className='col-4'>
-                    <div class="cardInColumn">
-                        <h5 class="text-center mb-4">CARTA DEL RESTAURANTE</h5>
-                        <div className="subheading mb-5">
-                            {this.PlatesTable(this.state.plates)}
+                <div className='cont-consult-res_carta'>
+                    <div className='cont-consult-res_platos'>
+                        <div class="cardInColumn-cli" id="platosCard">
+                            <h5 class="text-center mb-4">CARTA DEL RESTAURANTE</h5>
+                            <div className="cont-carta-p">
+                                {this.PlatesTable(this.state.plates)}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className='col-4'>
-                    <div class="cardInColumn">
-                        <h5 class="text-center mb-4">PEDIDO</h5>
-                        <div className="subheading mb-5">
-                            {this.CartTable(this.state.cart)}
+
+                    <div className='cont-consult-res_pedido'>
+                        <div class="cardInColumn-cli" id="cont-ped-cli">
+                            <h5 class="text-center mb-4">PEDIDO</h5>
+                            <div className="subheading">
+                                {this.CartTable(this.state.cart)}
+                            </div>
+                            <h5 class="text-center mb-4">PRECIO TOTAL: {this.state.totalPrice} €</h5>
+                            <Tooltip title="Tramitar pedido" placement="top-start">
+                                <FontAwesomeIcon icon={faCartShopping} font-size={20} color={"#000000"} onClick={() => this.goToOrders()} />
+                            </Tooltip>
                         </div>
-                        <h5 class="text-center mb-4">PRECIO TOTAL: {this.state.totalPrice} €</h5>
-                        <Tooltip title="Tramitar pedido" placement="top-start">
-                            <FontAwesomeIcon icon={faCartShopping} font-size={20} color={"#000000"} onClick={() => this.goToOrders()} />
-                        </Tooltip>
                     </div>
                 </div>
             </div>

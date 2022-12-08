@@ -28,7 +28,7 @@ class ConsultClient extends Component {
 			if ([400].indexOf(response.status) !== -1) {
 				this.props.history.push({
 					pathname: '/admin',
-					value: 4,
+					value: 3,
 				});
 			}
 			return response.json();
@@ -54,7 +54,7 @@ class ConsultClient extends Component {
 				if (response.status == 200) {
 					this.props.history.push({
 						pathname: '/admin',
-						value: 4,
+						value: 3,
 					});
 				}
 				return response.text();
@@ -91,7 +91,7 @@ class ConsultClient extends Component {
 					alert("Cambios guardados correctamente");
 					this.props.history.push({
 						pathname: '/admin',
-						value: 4,
+						value: 3,
 					});
 				}
 				return response.text();
@@ -117,7 +117,7 @@ class ConsultClient extends Component {
 	back = () => {
 		this.props.history.push({
 			pathname: '/admin',
-			value: 4,
+			value: 3,
 		});
 	}
 
@@ -154,61 +154,56 @@ class ConsultClient extends Component {
 
 	render() {
 		return (
-			<div class="center">
-				<img src={IMAGES.LOGO} className="logo" width="150" height="80" alt="" />
-				<div class="center">
-					<div class="center">
-						<div>
-							<div class="card">
-								<h5 class="text-center mb-4">INFORMACIÓN CLIENTE </h5>
-								<Tooltip title="No puede contener: [1-9]/*@..." placement="left-start">
-								<label class="form-control-label px-0">Nombre<span class="text-danger"> *</span></label>
-								</Tooltip>
-								<input class="Fields" type="text" name="name" placeholder={this.state.client.name} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
-								<label class="text-danger-custom" id="name"></label>
-								<Tooltip title="No puede contener: [1-9]/*@..." placement="left-start">
-								<label class="form-control-label px-0">Apellidos<span class="text-danger"> *</span></label>
-								</Tooltip>
-								<input class="Fields" type="text" name="surname" placeholder={this.state.client.surname} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
-								<label class="text-danger-custom" id="surname"></label>
-								<Tooltip title="No puede haber dos usuarios con el mismo email " placement="left-start">
-								<label class="form-control-label px-0">Email<span class="text-danger"> *</span></label>
-								</Tooltip>
-								<input class="Fields" type="text" name="email" placeholder={this.state.client.email} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
-								<label class="text-danger-custom" id="email"></label>
-								<Tooltip title="Debe contener 8 números y 1 letra" placement="left-start">
-								<label class="form-control-label px-0">NIF<span class="text-danger"> *</span></label>
-								</Tooltip>
-								<input class="Fields" type="text" name="nif" placeholder={this.state.client.nif} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
-								<label class="text-danger-custom" id="nif"></label>
-								<label class="form-control-label px-0">Dirección<span class="text-danger"> *</span></label>
-								<input class="Fields" type="text" name="address" placeholder={this.state.client.address} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
-								<Tooltip title="Debe tener 9 números y existir en España" placement="left-start">
-								<label class="form-control-label px-0">Teléfono<span class="text-danger"> *</span></label>
-								</Tooltip>
-								<input class="Fields" type="text" name="phone" placeholder={this.state.client.phone} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
-								<label class="text-danger-custom" id="phone"></label>
-								<div>
-									<label class="form-control-label px-0">Cuenta Activada<span class="text-danger"> *</span></label>
-									<input class="Fields" type="checkbox" name="activeAccount" defaultChecked={this.state.client.activeAccount} disabled={(this.state.disabled) ? "disabled" : ""} required="" onClick={this.handleChangeCheckBox} />
-								</div>
-								<div class="columns">
-									<input type="submit" value="MODIFICAR" onClick={this.handleModifyClik.bind(this)} />
-									<input type="submit" value="ELIMINAR" onClick={() => this.deleteClient()} />
-								</div>
-								<div hidden={this.state.disabled ? true : false}>
-									<label>¿Desea guardar los cambios?</label>
-									<div class="columns">
-										<input type="submit" value="ACEPTAR" onClick={() => this.modifyClient()} />
-										<input type="submit" value="CANCELAR" onClick={() => this.back()} />
-									</div>
-								</div>
-								<div class="columnsForIcons">
-								<Tooltip title="Cancelar" placement="top-start">
-                                    <FontAwesomeIcon icon={faLeftLong} font-size={20} color={"#000000"} onClick={() => this.back()} />
-                                </Tooltip>
-								</div>
-							</div>
+			<div className="center-log">
+				<div className="card-log">
+					<img src={IMAGES.LOGO} className="centerImage img_logo" alt="" />
+					
+					<div class="columnsForIcons">
+						<Tooltip title="Cancelar" placement="top-start">
+							<FontAwesomeIcon icon={faLeftLong} font-size={20} color={"#000000"} onClick={() => this.back()} />
+						</Tooltip>
+					</div>
+					<h5 class="text-center mb-4">INFORMACIÓN CLIENTE </h5>
+					<Tooltip title="No puede contener: [1-9]/*@..." placement="left-start">
+						<label class="form-control-label px-0">Nombre<span class="text-danger"> *</span></label>
+					</Tooltip>
+					<input class="Fields" type="text" name="name" placeholder={this.state.client.name} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
+					<label class="text-danger-custom" id="name"></label>
+					<Tooltip title="No puede contener: [1-9]/*@..." placement="left-start">
+						<label class="form-control-label px-0">Apellidos<span class="text-danger"> *</span></label>
+					</Tooltip>
+					<input class="Fields" type="text" name="surname" placeholder={this.state.client.surname} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
+					<label class="text-danger-custom" id="surname"></label>
+					<Tooltip title="No puede haber dos usuarios con el mismo email " placement="left-start">
+						<label class="form-control-label px-0">Email<span class="text-danger"> *</span></label>
+					</Tooltip>
+					<input class="Fields" type="text" name="email" placeholder={this.state.client.email} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
+					<label class="text-danger-custom" id="email"></label>
+					<Tooltip title="Debe contener 8 números y 1 letra" placement="left-start">
+						<label class="form-control-label px-0">NIF<span class="text-danger"> *</span></label>
+					</Tooltip>
+					<input class="Fields" type="text" name="nif" placeholder={this.state.client.nif} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
+					<label class="text-danger-custom" id="nif"></label>
+					<label class="form-control-label px-0">Dirección<span class="text-danger"> *</span></label>
+					<input class="Fields" type="text" name="address" placeholder={this.state.client.address} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
+					<Tooltip title="Debe tener 9 números y existir en España" placement="left-start">
+						<label class="form-control-label px-0">Teléfono<span class="text-danger"> *</span></label>
+					</Tooltip>
+					<input class="Fields" type="text" name="phone" placeholder={this.state.client.phone} disabled={(this.state.disabled) ? "disabled" : ""} required="" onChange={this.handleChange} />
+					<label class="text-danger-custom" id="phone"></label>
+					<div>
+						<label class="form-control-label px-0">Cuenta Activada<span class="text-danger"> *</span></label>
+						<input class="Fields" type="checkbox" name="activeAccount" defaultChecked={this.state.client.activeAccount} disabled={(this.state.disabled) ? "disabled" : ""} required="" onClick={this.handleChangeCheckBox} />
+					</div>
+					<div class="columns-rid">
+						<input type="submit" value="MODIFICAR" onClick={this.handleModifyClik.bind(this)} />
+						<input type="submit" value="ELIMINAR" onClick={() => this.deleteClient()} />
+					</div>
+					<div hidden={this.state.disabled ? true : false}>
+						<label>¿Desea guardar los cambios?</label>
+						<div class="columns-rid">
+							<input type="submit" value="ACEPTAR" onClick={() => this.modifyClient()} />
+							<input type="submit" value="CANCELAR" onClick={() => this.back()} />
 						</div>
 					</div>
 				</div>

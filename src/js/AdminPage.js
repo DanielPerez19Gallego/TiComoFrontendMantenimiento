@@ -14,11 +14,11 @@ import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 
 const starsArray = [
-	"#f17a45",
-	"#f19745",
-	"#f1a545",
-	"#f1b345",
-	"#f1d045",
+    "#f17a45",
+    "#f19745",
+    "#f1a545",
+    "#f1b345",
+    "#f1d045",
 ];
 
 /* FUNCTIONS */
@@ -62,9 +62,9 @@ class AdminPage extends Component {
 
     state = {
         admins: [], riders: [], clients: [], restaurants: [],
-        value: (this.props.location.value == undefined) ? 2 : this.props.location.value
+        value: (this.props.location.value == undefined) ? 1 : this.props.location.value
     }
-    
+
     /* INITIALIZER */
     componentDidMount() {
         fetch(ROUTES.PROXY + '/admin/showAllAdmins', {
@@ -135,38 +135,38 @@ class AdminPage extends Component {
             pathname: '/admin/consultRider/' + riderID,
         });
     }
-    
+
     goToClient(clientID) {
         this.props.history.push({
             pathname: '/admin/consultClient/' + clientID,
         });
     }
-    
+
     goToRestaurant(restaurantID) {
         this.props.history.push({
             pathname: '/admin/consultRestaurant/' + restaurantID,
         });
     }
-    
+
     roundAverage(number) {
-        let numberRegexp = new RegExp('\\d\\.(\\d){' + 2 + ',}'); 
-        if (numberRegexp.test(number)) {   
+        let numberRegexp = new RegExp('\\d\\.(\\d){' + 2 + ',}');
+        if (numberRegexp.test(number)) {
             return Number(number.toFixed(2));
         } else {
-            return Number(number.toFixed(2)) === 0 ? 0 : number; 
+            return Number(number.toFixed(2)) === 0 ? 0 : number;
         }
     }
 
-    rateColour(rate){
-        if (rate>=0 && rate <1){
+    rateColour(rate) {
+        if (rate >= 0 && rate < 1) {
             return "#f17a45"
-        }else if(rate>=1 && rate <2){
+        } else if (rate >= 1 && rate < 2) {
             return "#f19745"
-        }else if(rate>=2 && rate <3){
+        } else if (rate >= 2 && rate < 3) {
             return "#f1a545"
-        }else if(rate>=3 && rate <4){
+        } else if (rate >= 3 && rate < 4) {
             return "#f1b345"
-        }else{
+        } else {
             return "#f1d045"
         }
     }
@@ -178,8 +178,8 @@ class AdminPage extends Component {
             (element) => {
                 return (
                     <tr>
-                        <td>{counter++}</td>
-                        <td>
+                        <td data-label="#" >{counter++}</td>
+                        <td data-label="Email" >
                             <button
                                 className="button-custom"
                                 onClick={() => this.goToAdmin(element.id)}
@@ -192,9 +192,9 @@ class AdminPage extends Component {
             }
         )
         return (
-            <div style={{ width: "695px" }}>
+            <div className='centrado'>
                 <Table striped bordered hover variant="light">
-                    <thead>
+                    <thead className='ancho-completo'>
                         <tr>
                             <th>#</th>
                             <th>Email</th>
@@ -214,8 +214,8 @@ class AdminPage extends Component {
             (element) => {
                 return (
                     <tr>
-                        <td>{counter++}</td>
-                        <td>
+                        <td data-label="#" >{counter++}</td>
+                        <td data-label="Email" >
                             <button
                                 className="button-custom"
                                 onClick={() => this.goToRider(element.id)}
@@ -228,7 +228,7 @@ class AdminPage extends Component {
             }
         )
         return (
-            <div style={{ width: "695px" }}>
+            <div className='centrado'>
                 <Table striped bordered hover variant="light">
                     <thead>
                         <tr>
@@ -250,9 +250,9 @@ class AdminPage extends Component {
             (element) => {
                 return (
                     <tr>
-                        <td>{counter++}</td>
-                        <td>
-                        <button
+                        <td data-label="#" >{counter++}</td>
+                        <td data-label="Email" >
+                            <button
                                 className="button-custom"
                                 onClick={() => this.goToClient(element.id)}
                             >
@@ -264,18 +264,18 @@ class AdminPage extends Component {
             }
         )
         return (
-            <div style={{ width: "695px" }}>
-            <Table striped bordered hover variant="light">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {tableRows}
-                </tbody>
-            </Table>
+            <div className='centrado'>
+                <Table striped bordered hover variant="light">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {tableRows}
+                    </tbody>
+                </Table>
             </div>
         );
     }
@@ -286,16 +286,16 @@ class AdminPage extends Component {
             (element) => {
                 return (
                     <tr>
-                        <td>{counter++}</td>
-                        <td>
-                        <button
+                        <td data-label="#" >{counter++}</td>
+                        <td data-label="Nombre" >
+                            <button
                                 className="button-custom"
                                 onClick={() => this.goToRestaurant(element.id)}
                             >
                                 {element.name}
                             </button>
                         </td>
-                        <td>
+                        <td data-label="Valoración" className='izq'>
                             {this.roundAverage(element.averageRate)}<FontAwesomeIcon icon={faStar} font-size={20} color={this.rateColour(element.averageRate)} />
                         </td>
                     </tr>
@@ -303,19 +303,19 @@ class AdminPage extends Component {
             }
         )
         return (
-            <div style={{ width: "695px" }}>
-            <Table striped bordered hover variant="light">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nombre</th>
-                        <th>Valoración</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {tableRows}
-                </tbody>
-            </Table>
+            <div className='centrado'>
+                <Table striped bordered hover variant="light">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Valoración</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {tableRows}
+                    </tbody>
+                </Table>
             </div>
         );
     }
@@ -332,56 +332,50 @@ class AdminPage extends Component {
 
     render() {
         return (
-            <><Box
-                sx={{ flexGrow: 1, bgcolor: 'white', height: 800, display: 'flex', width: 1000 }}
-            >
-                <Tabs
-                    orientation='vertical'
-                    variant="fullwidth"
-                    value={this.state.value}
-                    onChange={this.handleTabChange}
-                    aria-label="full width tabs example"
-                    TabIndicatorProps={{ sx: { backgroundColor: '#D6C2B5' } }}
-                    sx={{ borderRight: 1, borderColor: 'divider', backgroundColor: '#3F322B', width: 250 }}
-                    textColor="white"
-                    centered
-                >
-                    <img src={IMAGES.FONDO_TRANSPARENTE} className="logo" width="160" height="50" alt="" />
-                    <img src={IMAGES.LOGO_FONDO} className="logo" width="160" height="90" alt="" />
-                    <Tab label={<span style={{ color: '#D6C2B5' }}>Administradores</span>} {...a11yProps(2)} />
-                    <Tab label={<span style={{ color: '#D6C2B5' }}>Riders</span>} {...a11yProps(3)} />
-                    <Tab label={<span style={{ color: '#D6C2B5' }}>Usuarios</span>} {...a11yProps(4)} />
-                    <Tab label={<span style={{ color: '#D6C2B5' }}>Restaurantes</span>} {...a11yProps(5)} />
-                    <FontAwesomeIcon icon={faRightFromBracket} font-size={20} color={"#D6C2B5"} onClick={() => this.logout()} />
-                </Tabs>
+            <div className='cont-gest'>
+                <div className='cont-gest-header2'>
+                    <Box>
+                        <Tabs className="menu-tabs"
+                            orientation='vertical'
+                            value={this.state.value}
+                            onChange={this.handleTabChange}
+                            aria-label="full width tabs example"
+                            TabIndicatorProps={{ sx: { backgroundColor: '#D6C2B5' } }}
+                        >
+                            <img src={IMAGES.LOGO_FONDO} className="img_logo" alt="" id="foto-tabs-cli" />
+                            <Tab label={<span style={{ color: '#D6C2B5' }}>Administradores</span>} {...a11yProps(1)} />
+                            <Tab label={<span style={{ color: '#D6C2B5' }}>Riders</span>} {...a11yProps(2)} />
+                            <Tab label={<span style={{ color: '#D6C2B5' }}>Usuarios</span>} {...a11yProps(3)} />
+                            <Tab label={<span style={{ color: '#D6C2B5' }}>Restaurantes</span>} {...a11yProps(4)} />
+                            <FontAwesomeIcon icon={faRightFromBracket} font-size={20} color={"#D6C2B5"} onClick={() => this.logout()} />
+                        </Tabs>
+                    </Box>
+                </div>
+                <div className='cont-gest-body2'>
+                    <TabPanel value={this.state.value} index={1}>
+                        <h2>GESTIÓN DE ADMINS</h2>
+                        {this.AdminsTable(this.state.admins)}
+                        <Link to={"/admin/addAdmin"}>Añadir un nuevo administrador</Link>
+                    </TabPanel>
 
-                <TabPanel value={this.state.value} index={2}>
-                    <h2>GESTIÓN DE ADMINS</h2>
-                    {this.AdminsTable(this.state.admins)}
-                    <Link to={"/admin/addAdmin"}>Añadir un nuevo administrador</Link>
-                </TabPanel>
+                    <TabPanel value={this.state.value} index={2}>
+                        <h2>GESTIÓN DE RIDERS</h2>
+                        {this.RidersTable(this.state.riders)}
+                        <Link to={"/admin/addRider"}>Añadir un nuevo rider</Link>
+                    </TabPanel>
 
-                <TabPanel value={this.state.value} index={3}>
-                    <h2>GESTIÓN DE RIDERS</h2>
-                    {this.RidersTable(this.state.riders)}
-                    <Link to={"/admin/addRider"}>Añadir un nuevo rider</Link>
-                </TabPanel>
+                    <TabPanel value={this.state.value} index={3}>
+                        <h2>GESTIÓN DE CLIENTES</h2>
+                        {this.ClientsTable(this.state.clients)}
+                    </TabPanel>
 
-                <TabPanel value={this.state.value} index={4}>
-                    <h2>GESTIÓN DE CLIENTES</h2>
-                    {this.ClientsTable(this.state.clients)}
-                </TabPanel>
-
-                <TabPanel value={this.state.value} index={5}>
-                    <h2>GESTIÓN DE RESTAURANTES</h2>
-                    {this.RestaurantsTable(this.state.restaurants)}
-                    <Link to={"/admin/addRestaurant"}>Añadir un nuevo restaurante</Link>
-                </TabPanel>
-
-            </Box>
-                <div>
-                    <input type="button" value="LOGOUT" onClick={() => this.logout()} />
-                </div></>
+                    <TabPanel value={this.state.value} index={4}>
+                        <h2>GESTIÓN DE RESTAURANTES</h2>
+                        {this.RestaurantsTable(this.state.restaurants)}
+                        <Link to={"/admin/addRestaurant"}>Añadir un nuevo restaurante</Link>
+                    </TabPanel>
+                </div>
+            </div>
         )
     }
 
